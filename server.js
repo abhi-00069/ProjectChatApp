@@ -9,6 +9,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 
+process.on("uncaughtException", err => {
+    console.error("Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", err => {
+    console.error("Unhandled Rejection:", err);
+});
+
 
 const app = express();
 const server = http.createServer(app);
@@ -369,11 +377,11 @@ io.on('connection', async (socket) => {
 
 
 mongoose.connect(MONGO_URI)
-    .then(() => {
-        console.log('✅ MongoDB Connected via Mongoose');
-        server.listen(PORT, () => console.log(`🚀 Nexus Chat running on http://localhost:${PORT}`));
-    })
-    .catch(err => {
-        console.error('❌ MongoDB connection failed:', err.message);
-        process.exit(1);
-    });
+.then(() => {
+    console.log("MongoDB Connected");
+    server.listen(PORT, () => console.log(`Running on port ${PORT}`));
+})
+.catch(err => {
+    console.error("Mongo Error:", err);
+    process.exit(1);
+});
