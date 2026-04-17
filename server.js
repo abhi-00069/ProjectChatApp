@@ -267,7 +267,7 @@ app.get('/api/backup', authMiddleware, async (req, res) => {
 });
 
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'front', 'index.html'));
 });
 
