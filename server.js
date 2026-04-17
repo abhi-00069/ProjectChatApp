@@ -139,9 +139,14 @@ app.post('/api/auth/register', async (req, res) => {
             user: { id: user._id, username: user.username, email: user.email, avatar: user.avatar }
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
-    }
+    console.error("REGISTER ERROR:", err);
+
+    res.status(500).json({
+        error: err.message,
+        code: err.code,
+        name: err.name
+    });
+}
 });
 
 
