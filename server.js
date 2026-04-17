@@ -18,8 +18,18 @@ const io = socketio(server, {
 
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/nexusChat';
-const JWT_SECRET = process.env.JWT_SECRET || 'nexus_super_secret_2025';
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!MONGO_URI) {
+    console.error("MONGO_URI is missing");
+    process.exit(1);
+}
+
+if (!JWT_SECRET) {
+    console.error("JWT_SECRET is missing");
+    process.exit(1);
+}
 
 
 app.use(cors());
@@ -367,11 +377,10 @@ io.on('connection', async (socket) => {
     });
 });
 
-
 mongoose.connect(MONGO_URI)
     .then(() => {
         console.log('✅ MongoDB Connected via Mongoose');
-        server.listen(PORT, () => console.log(`🚀 Nexus Chat running on http://localhost:${PORT}`));
+        server.listen(PORT, () => console.log(`🚀 Nexus Chat running on port ${PORT}`));
     })
     .catch(err => {
         console.error('❌ MongoDB connection failed:', err.message);
