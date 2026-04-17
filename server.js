@@ -26,8 +26,11 @@ const io = socketio(server, {
 
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/nexusChat';
-const JWT_SECRET = process.env.JWT_SECRET || 'nexus_super_secret_2025';
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!MONGO_URI) throw new Error("Missing MONGO_URI");
+if (!JWT_SECRET) throw new Error("Missing JWT_SECRET");
 
 
 app.use(cors());
@@ -265,7 +268,7 @@ app.get('/api/backup', authMiddleware, async (req, res) => {
 });
 
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'front', 'index.html'));
 });
 
