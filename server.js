@@ -384,17 +384,11 @@ io.on('connection', async (socket) => {
 });
 
 
-mongoose.connect(MONGO_URI, {
-    serverSelectionTimeoutMS: 10000
-})
-.then(() => {
-    console.log("MongoDB Connected");
-
-    server.listen(PORT, () => {
-        console.log(`Running on port ${PORT}`);
-    });
-})
-.catch(err => {
-    console.error("Mongo Error:", err);
-    process.exit(1);
-});
+server.listen(PORT, async () => {
+    console.log(`Running on port ${PORT}`);
+    try {
+        await mongoose.connect(MONGO_URI);
+        console.log("MongoDB Connected");
+    } catch (err) {
+        console.error("Mongo Error:", err);
+    }
