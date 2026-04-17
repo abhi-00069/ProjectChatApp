@@ -149,7 +149,7 @@ body {
   top: 0; left: 0; right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent-pink), var(--accent-cyan));
-  background-size: 200% 200%;
+  background-size: 201% 201%;
   animation: gradientShift 3s ease infinite;
 }
 
