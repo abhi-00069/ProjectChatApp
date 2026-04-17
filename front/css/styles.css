@@ -49,7 +49,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+  55%       { transform: translateY(-8px); }
 }
 
 
@@ -69,7 +69,7 @@
 
   --accent:        #5865f2;
   --accent-hover:  #4752c4;
-  --accent-glow:   rgba(88,101,242,0.35);
+  --accent-glow:   rgba(88,99,242,0.35);
   --accent-green:  #23a55a;
   --accent-red:    #ed4245;
   --accent-yellow: #fee75c;
